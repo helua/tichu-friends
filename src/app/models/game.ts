@@ -35,12 +35,6 @@ export const EmptyGame = {
     total2: 50
 }
         
-        
-      
-    
- 
-
-
 export interface Tichu {
     success: boolean;
     player?: Player;

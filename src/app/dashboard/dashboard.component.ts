@@ -34,7 +34,17 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.scoreService.scoreSheet.subscribe(data => (this.game = data));
+    this.scoreService.scoreSheet.subscribe(
+      (data) => {
+        this.game = data;
+      },
+      (err) => {
+        console.log('Received error:', err);
+      },
+      () => {
+        console.log('Completed');
+      }
+    );
     console.log('Start: ', this.game );
 
   }
@@ -42,7 +52,23 @@ export class DashboardComponent implements OnInit {
     this.showGame.emit();
   }
   sendScore(game: Game){
+
     this.newGame.emit(game);
+    // this.scoreService.scoreSheet.unsubscribe();
+    // this.scoreService.scoreSheet.subscribe(
+    //   (data) => {
+    //     this.game = data;
+    //   },
+    //   (err) => {
+    //     console.log('Received error:', err);
+    //   },
+    //   () => {
+    //     console.log('Completed');
+    //   }
+    // );
+    // console.log('New Start: ', this.game );
+
+    console.log(this.scoreService.scoreSheet);
     this.clearSheet();
   }
 
@@ -57,12 +83,8 @@ export class DashboardComponent implements OnInit {
     this.gFail1Checked = false;
     this.gFail2Checked = false;
     this.duel1Checked = false;
-    this.duel2Checked = false;
-    this.scoreService.scoreSheet.complete;
-    this.game = EmptyGame;
-
-    console.log(this.game);
-
+    this.duel2Checked = false; 
+    // this.scoreService.scoreSheet.unsubscribe();
   }
 
   updateTotal(): void{
