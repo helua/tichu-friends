@@ -1,0 +1,20 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>Gracz 1</mat-label>
+        <input type="text" matInput  [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let player of filteredPlayers | async" [value]="player">
+            {{player.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Gracz 2</mat-label>
+        <input type="text" matInput  [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let player of filteredPlayers | async" [value]="player">
+            {{player.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+  </form>

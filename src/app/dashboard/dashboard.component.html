@@ -1,0 +1,122 @@
+<div class="cont">
+
+    <div class="column-2">
+        <h2>Team 1</h2>
+        <app-players team="1"></app-players>
+        <span>{{ game.total1 }}</span>
+    </div>
+
+    <div class="column-2">
+        <h2>Team 2</h2>
+        <app-players team="2"></app-players>
+        <span>{{ game.total2 }}</span>
+    </div>
+</div>
+<div class="cont">
+    <label>Punkty</label>
+    <mat-slider 
+        thumbLabel
+        #cards
+        tickInterval="auto"
+        min="-25"
+        max="125"
+        step="5"
+        value="50"
+        (change)="scoreSet(cards.value)"
+        [disabled]="duel1Checked"
+        [disabled]="duel2Checked"
+
+        >
+    </mat-slider>
+</div>
+
+<div class="cont">
+    <div class="column-2">
+        <h3>Team 1</h3>
+        
+        <mat-slide-toggle 
+            [checked]="tichu1Checked"
+            [disabled]="grande1Checked"
+            [disabled]="tichu2Checked"
+            [disabled]="grande2Checked"
+            [disabled]="duel2Checked"
+            (change)="updateTichu(1, $event)">
+            Tichu 1
+        </mat-slide-toggle>
+        <mat-slide-toggle
+            [checked]="fail1Checked"
+            (change)="updateTichuFail(1, $event)">
+            Tichu 1 Fail
+        </mat-slide-toggle>
+        <mat-slide-toggle 
+            [checked]="grande1Checked"
+            [disabled]="tichu1Checked"
+            [disabled]="tichu2Checked"
+            [disabled]="grande2Checked"
+            [disabled]="duel2Checked"
+            (change)="updateGrande(1, $event)"> 
+            Grande Tichu 1
+        </mat-slide-toggle>
+        <mat-slide-toggle 
+            (change)="updateGrandeFail(1, $event)"
+            [checked]=" gFail1Checked">
+            Grande Fail 1
+        </mat-slide-toggle>
+        <mat-slide-toggle
+            (change)="updateDuel(1, $event)"
+            [checked]="duel1Checked"
+            [disabled]="duel2Checked"
+            [disabled]="tichu2Checked"
+            [disabled]="grande2Checked">
+            Duel 1
+        </mat-slide-toggle>
+    </div>
+
+    <div class="column-2">
+        <h3>Team 2</h3>
+        
+        <mat-slide-toggle 
+            [checked]="tichu2Checked"
+            [disabled]="tichu1Checked"
+            [disabled]="grande1Checked"
+            [disabled]="duel1Checked"
+            (change)="updateTichu(2, $event)">
+            Tichu 2
+        </mat-slide-toggle>
+        <mat-slide-toggle
+            [checked]="fail2Checked"
+            (change)="updateTichuFail(2, $event)">
+            Tichu 2 Fail
+        </mat-slide-toggle>
+        <mat-slide-toggle 
+            [checked]="grande2Checked"
+            [disabled]="tichu1Checked"
+            [disabled]="tichu2Checked"
+            [disabled]="grande1Checked"
+            [disabled]="duel1Checked"
+            (change)="updateGrande(2, $event)"> 
+            Grande Tichu 2
+        </mat-slide-toggle>
+        <mat-slide-toggle 
+            (change)="updateGrandeFail(2, $event)"
+            [checked]="gFail2Checked">
+            Grande Fail 2
+        </mat-slide-toggle>
+        <mat-slide-toggle
+            (change)="updateDuel(2, $event)"
+            [checked]="duel2Checked"
+            [disabled]="duel1Checked"            
+            [disabled]="tichu1Checked"
+            [disabled]="grande1Checked">
+            Duel 2
+        </mat-slide-toggle>
+    </div>
+</div>
+<div class="cont">
+    <button (click)="scoreService.sendScore(); sendScore(game)" class="add" mat-fab color="accent" >
+        <mat-icon>add</mat-icon>
+    </button>
+    <button (click)="showBigGame()" class="add" mat-fab color="primary" >
+        <mat-icon>assignment</mat-icon>
+    </button>
+</div>
