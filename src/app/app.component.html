@@ -1,2 +1,50 @@
-<app-dashboard (newGame)="saveGame($event)" (showGame)="showBigGame()"></app-dashboard>
-<app-result></app-result>
+<h1><span class="material-icons">star</span>{{title}}</h1>
+
+    <div class="cont">
+        <div class="column-2">
+            <app-players (newTeam)="onNewTeam($event)" team="1"></app-players>
+            <h2>Team 1</h2>
+        </div>
+    
+        <div class="column-2">
+            <app-players team="2"></app-players>
+            <h2>Team 2</h2>
+
+        </div>
+    </div>
+    
+<app-dashboard (newGame)="onNewGame($event)" (newBigGame)="onNewBigGame($event)"></app-dashboard>
+<!-- <app-result [bigGame]="exportBigGame"></app-result> -->
+<h2>Scoresheet</h2>
+<div class="cont">
+    <div class="column-2">
+        <h3>Team 1</h3>
+    </div>
+    <div class="column-2">
+        <h3>Team 2</h3>
+    </div>
+    <div class="scoresheet">
+        <div *ngFor="let game of games">
+            <div class="column-2">
+                {{ game.total1  }}
+            </div>
+            <div class="column-2">
+
+                {{ game.total2 }}
+
+            </div>
+        </div>
+    </div>
+    <p>------------------------------------------------------------------------------------------------</p>
+    <div>
+        <div class="column-2">
+            {{ bigGameTotal(1) }}
+            <!-- next {{ bigGameTotalFuture(1) }} -->
+        </div>
+        <div class="column-2">
+            {{ bigGameTotal(2) }}
+            <!-- next {{ bigGameTotalFuture(2) }} -->
+
+        </div>
+    </div>
+</div>

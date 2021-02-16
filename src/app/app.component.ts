@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { BigGame, Game } from './models/game';
-import { BIGGAME } from './models/big-game';
+import { BigGame, EmptyGame, Game, Player, PlayersInTeam } from './models/game';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
+import { HttpService } from './services/http.service';
+
 
 @Component({
   selector: 'app-root',
@@ -12,30 +13,88 @@ import { tap } from 'rxjs/operators';
 export class AppComponent{
 
   title = 'tichu-friends';
-  game: Game;
-  bigGame: BigGame = BIGGAME;
-  private url: "http://localhost:3000"
+  game: Game = EmptyGame;
+  games: Game[] = [];
+  bigGame: BigGame;
+  playersActive: Player[] = [];
 
-  constructor(private http: HttpClient) { }
+  // exportBigGame = new BehaviorSubject<Game[]>(this.bigGame);
+
+  private url: "http://localhost:3000/games"
+
+  constructor(private http: HttpClient, private httpService: HttpService) { }
 
 
-  saveGame(game: Game){
-    this.bigGame.games.unshift(game);
-    console.log(this.bigGame);
-    this.postFirstGame(this.bigGame);
-  }
-
-  postFirstGame(firstgame: BigGame){
-    console.log('game posted');
-    return this.http.post('http://localhost:3000/bigGames', firstgame)
+  onNewGame(game: Game){
+    this.game = game;
+    this.game.player1a
+    this.games.push(game);
+    return this.http.post('http://localhost:3000/games', game)
       .pipe(tap(console.log)).subscribe(
         result => console.log(result),
         error => console.log(error)
       );
   }
-
-
-  showBigGame(){
-    console.log(this.bigGame);
+  onNewBigGame(bigGame: BigGame){
+    this.bigGame = bigGame;
+    this.games = [];
+    return this.http.post('http://localhost:3000/bigGames', bigGame)
+      .pipe(tap(console.log)).subscribe(
+        result => console.log(result),
+        error => console.log(error)
+      );
   }
+  
+  bigGameTotal(t: number){
+    if( t == 1 ){
+      var totalPoints = this.games.reduce((accum,item) => accum + item.total1, 0)
+    }
+    if ( t == 2 ){
+      var totalPoints = this.games.reduce((accum,item) => accum + item.total2, 0)
+    }
+    return totalPoints;
+  }
+
+  bigGameTotalFuture(t: number){
+    if( t == 1 ){
+      var totalPointsFuture = this.game.total1 + this.bigGameTotal(1);
+    }
+    if ( t == 2 ){
+      var totalPointsFuture = this.game.total2 + this.bigGameTotal(2);
+    }
+    return totalPointsFuture;
+  }
+
+  onNewTeam(model: PlayersInTeam){
+    if(model.team == 1){
+      this.game.player1a = model.playerA;
+      this.game.player1b = model.playerB;
+    }
+    else{
+      this.game.player2a = model.playerA;
+      this.game.player2b = model.playerB;
+    }
+
+    console.log(this.game)
+  }
+
+  // postFirstGame(firstgame: BigGame){
+  //   return this.http.post('http://localhost:3000/games', firstgame)
+  //     .pipe(tap(console.log)).subscribe(
+  //       result => console.log(result),
+  //       error => console.log(error)
+  //     );
+  // }
+
+  // postNextGame(nextgame: Game){
+  //   return this.http.post('http://localhost:3000/games', nextgame)
+  //   .pipe(tap(console.log)).subscribe(
+  //     result => console.log(result),
+  //     error => console.log(error)
+  //   );
+
+  //}
+
+
+
 }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { EmptyGame, Game } from '../models/game';
-import { ScoreService } from '../services/score.service';
+import { Subject } from 'rxjs';
+import { BIGGAME } from '../models/big-game';
+import { EmptyGame, Game, BigGame } from '../models/game';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,53 +23,84 @@ export class DashboardComponent implements OnInit {
   c1: number;
   c2: number;
   game: Game;
+  games: Game[] = [];
+  bigGame: BigGame = BIGGAME;
   @Output() newGame = new EventEmitter<Game>();
-  @Output() showGame = new EventEmitter<any>();
+  @Output() newBigGame = new EventEmitter<BigGame>();
 
-  constructor(public scoreService: ScoreService) {
+  // lastGame =  new Subject<Game>();
 
-  }
+  // constructor(public scoreService: ScoreService) {
+
+  // }
 
   
-
+  
 
   ngOnInit(): void {
 
-    this.scoreService.scoreSheet.subscribe(
-      (data) => {
-        this.game = data;
-      },
-      (err) => {
-        console.log('Received error:', err);
-      },
-      () => {
-        console.log('Completed');
-      }
-    );
+    this.game = EmptyGame;
     console.log('Start: ', this.game );
 
   }
-  showBigGame(): void{
-    this.showGame.emit();
+  
+  showGame(): void{
+    console.log(this.game)
   }
-  sendScore(game: Game){
 
+  sendGame(game: Game){
+    this.games.push(game);
     this.newGame.emit(game);
-    // this.scoreService.scoreSheet.unsubscribe();
-    // this.scoreService.scoreSheet.subscribe(
-    //   (data) => {
-    //     this.game = data;
-    //   },
-    //   (err) => {
-    //     console.log('Received error:', err);
-    //   },
-    //   () => {
-    //     console.log('Completed');
-    //   }
-    // );
-    // console.log('New Start: ', this.game );
+    this.game = {
+      cards1: 50,
+      cards2: 50,
+      tichu1: {
+          player1: {
+              success: undefined,
+              grande: undefined,
+              score: 0,
+          },
+          player2: {
+              success: undefined,
+              grande: undefined,
+              score: 0,
+          }
+          },
+      tichu2: {
+          player1: {
+              success: undefined,
+              grande: undefined,
+              score: 0,
+          },
+          player2: {
+              success: undefined,
+              grande: undefined,
+              score: 0,
+          }
+        },
+      duel1:  {
+          success: undefined,
+          score: 0
+      },
+      duel2:  {
+          success: undefined,
+          score: 0
+      },
+      total1: 50,
+      total2: 50
+    }
+    this.clearSheet();
+  }
 
-    console.log(this.scoreService.scoreSheet);
+  sendBigGame(games: Game[]){
+    
+    this.bigGame = {
+      games: games,
+    }
+    console.log(this.bigGame);  
+    this.newBigGame.emit(this.bigGame);
+    this.games = [];
+    this.bigGame = BIGGAME;
     this.clearSheet();
   }
 
@@ -84,12 +116,11 @@ export class DashboardComponent implements OnInit {
     this.gFail2Checked = false;
     this.duel1Checked = false;
     this.duel2Checked = false; 
-    // this.scoreService.scoreSheet.unsubscribe();
   }
 
   updateTotal(): void{
-    this.game.total1 = this.game.cards1 + this.game.tichu1.score + this.game.duel1.score;
-    this.game.total2 = this.game.cards2 + this.game.tichu2.score + this.game.duel2.score;
+    this.game.total1 = this.game.cards1 + this.game.tichu1.player1.score + this.game.duel1.score;
+    this.game.total2 = this.game.cards2 + this.game.tichu2.player1.score + this.game.duel2.score;
   }
   
 
@@ -97,7 +128,7 @@ export class DashboardComponent implements OnInit {
       this.game.cards1 = value;
       this.game.cards2 = 100 - value;
       this.updateTotal();
-      this.scoreService.scoreSheet.next(this.game);
+      // this.scoreService.scoreSheet.next(this.game);
   }
 
   duelCards(): void{
@@ -119,13 +150,14 @@ export class DashboardComponent implements OnInit {
       this.tichu1Checked = c;
 
       if(c == true){
-        this.game.tichu1.success = c;
-        this.game.tichu1.score += 100;
+        this.game.tichu1.player1.success = c;
+        this.game.tichu1.player1.score += 100;
+
 
       }
       else{
-        this.game.tichu1.success = undefined;
-        this.game.tichu1.score -= 100;
+        this.game.tichu1.player1.success = undefined;
+        this.game.tichu1.player1.score -= 100;
 
       }
       console.log(this.game);    
@@ -136,20 +168,20 @@ export class DashboardComponent implements OnInit {
 
       if(c == true){
 
-        this.game.tichu2.success = c;
-        this.game.tichu2.score += 100;
+        this.game.tichu2.player1.success = c;
+        this.game.tichu2.player1.score += 100;
 
       }
       else{
-        this.game.tichu2.success = undefined;
-        this.game.tichu2.score -= 100;
+        this.game.tichu2.player1.success = undefined;
+        this.game.tichu2.player1.score -= 100;
 
       }
       console.log(this.game);    
 
     }
     this.updateTotal();
-    this.scoreService.scoreSheet.next(this.game);
+// //     this.scoreService.scoreSheet.next(this.game);
 
 
   }
@@ -160,12 +192,12 @@ export class DashboardComponent implements OnInit {
     if(t == 1){
       this.fail1Checked = c;
       if(c == true){
-        this.game.tichu1.success = !c;
-        this.game.tichu1.score -= 100;
+        this.game.tichu1.player1.success = !c;
+        this.game.tichu1.player1.score -= 100;
       }
       else{
-        this.game.tichu1.success = undefined;
-        this.game.tichu1.score += 100;
+        this.game.tichu1.player1.success = undefined;
+        this.game.tichu1.player1.score += 100;
       }
       console.log(this.game);    
 
@@ -175,18 +207,18 @@ export class DashboardComponent implements OnInit {
 
       if(c == true){
 
-        this.game.tichu2.success = !c;
-        this.game.tichu2.score -= 100;
+        this.game.tichu2.player1.success = !c;
+        this.game.tichu2.player1.score -= 100;
       }
       else{
-        this.game.tichu2.success = undefined;
-        this.game.tichu2.score += 100;
+        this.game.tichu2.player1.success = undefined;
+        this.game.tichu2.player1.score += 100;
       }
       console.log(this.game);    
 
     }
     this.updateTotal();
-    this.scoreService.scoreSheet.next(this.game);
+// //     this.scoreService.scoreSheet.next(this.game);
 
   }
 
@@ -197,13 +229,13 @@ export class DashboardComponent implements OnInit {
       this.grande1Checked = c;
 
       if(c == true){
-        this.game.tichu1.success = c;
-        this.game.tichu1.grande = c;
-        this.game.tichu1.score += 200;
+        this.game.tichu1.player1.success = c;
+        this.game.tichu1.player1.grande = c;
+        this.game.tichu1.player1.score += 200;
       }
       else{
-        this.game.tichu1.grande = undefined;
-        this.game.tichu1.score -= 200;
+        this.game.tichu1.player1.grande = undefined;
+        this.game.tichu1.player1.score -= 200;
       }
       console.log(this.game);    
 
@@ -212,19 +244,19 @@ export class DashboardComponent implements OnInit {
       this.grande2Checked = c;
 
       if(c == true){
-        this.game.tichu2.success = c;
-        this.game.tichu2.grande = c;
-        this.game.tichu2.score += 200;
+        this.game.tichu2.player1.success = c;
+        this.game.tichu2.player1.grande = c;
+        this.game.tichu2.player1.score += 200;
       }
       else{
-        this.game.tichu2.grande = undefined;
-        this.game.tichu2.score -= 200;
+        this.game.tichu2.player1.grande = undefined;
+        this.game.tichu2.player1.score -= 200;
       }
       console.log(this.game);    
 
     }
     this.updateTotal();
-    this.scoreService.scoreSheet.next(this.game);
+// //     this.scoreService.scoreSheet.next(this.game);
 
 
   }
@@ -236,14 +268,14 @@ export class DashboardComponent implements OnInit {
       this.gFail1Checked = c;
 
       if(c == true){
-        this.game.tichu1.success = !c;
-        this.game.tichu1.grande = !c;
-        this.game.tichu1.score -= 200;
+        this.game.tichu1.player1.success = !c;
+        this.game.tichu1.player1.grande = !c;
+        this.game.tichu1.player1.score -= 200;
       }
       else{
-        this.game.tichu1.success = undefined;
-        this.game.tichu1.grande = undefined;
-        this.game.tichu1.score += 200;
+        this.game.tichu1.player1.success = undefined;
+        this.game.tichu1.player1.grande = undefined;
+        this.game.tichu1.player1.score += 200;
       }
       console.log(this.game);    
 
@@ -252,19 +284,19 @@ export class DashboardComponent implements OnInit {
       this.gFail2Checked = c;
 
       if(c == true){
-        this.game.tichu2.success = !c;
-        this.game.tichu2.grande = !c;
-        this.game.tichu2.score -= 200;
+        this.game.tichu2.player1.success = !c;
+        this.game.tichu2.player1.grande = !c;
+        this.game.tichu2.player1.score -= 200;
       }
       else{
-        this.game.tichu2.success = undefined;
-        this.game.tichu2.grande = undefined;
-        this.game.tichu2.score += 200;
+        this.game.tichu2.player1.success = undefined;
+        this.game.tichu2.player1.grande = undefined;
+        this.game.tichu2.player1.score += 200;
       }
 
     }
     this.updateTotal();
-    this.scoreService.scoreSheet.next(this.game);
+// //     this.scoreService.scoreSheet.next(this.game);
 
   }
 
@@ -308,7 +340,7 @@ export class DashboardComponent implements OnInit {
     }
 
     this.updateTotal();
-    this.scoreService.scoreSheet.next(this.game);
+// //     this.scoreService.scoreSheet.next(this.game);
 
   }
 

@@ -1,43 +1,58 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
+
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { HttpService } from '../services/http.service';
+import { Player, PlayersInTeam} from '../models/game'
 
-export interface Player {
-  name: string;
-}
 
 @Component({
   selector: 'app-players',
   templateUrl: './players.component.html',
   styleUrls: ['./players.component.scss']
 })
-export class PlayersComponent implements OnInit{
+export class  PlayersComponent implements OnInit{
 
-  myControl = new FormControl();
+  model: PlayersInTeam = {
+    playerA: null,
+    playerB: null,
+    team: null
+  };
+  @Input() team: number;
+  @Output() newTeam = new EventEmitter<PlayersInTeam>();
+
   
-  players: Player[] = [
-    {name: 'Helio'},
-    {name: 'Kostek'},
-    {name: 'Igor'},
-    {name: 'Ania'},
-    {name: 'Panczez'},
-    {name: 'Walc'},
-    {name: 'Mikele'}
-  ];
+  players: Player[];
+      // {name: 'Helio'},
+    // {name: 'Kostek'},
+    // {name: 'Igor'},
+    // {name: 'Ania'},
+    // {name: 'Panczez'},
+    // {name: 'Walc'},
+    // {name: 'Mikele'}
 
-  filteredPlayers: Observable<Player[]>;
+  filteredPlayers: Player[] = [];
+  currentName = '';
   
-
-  constructor() { }
+  
+  constructor(private http: HttpService) { }
 
   ngOnInit(): void {
-    this.filteredPlayers = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => typeof value === 'string' ? value : value.name),
-        map(name => name ? this._filter(name) : this.players.slice())
-      );
+   
+    this.http.getPlayers().subscribe(kupa =>{
+      this.players = kupa;
+      this.filteredPlayers = kupa;
+    })
+    console.log(this.players);
+    this.model.team = this.team;
+
+  }
+
+  setPlayer(model: PlayersInTeam): void{
+    console.log(this.model),
+      this.newTeam.emit(model);
   }
 
   
@@ -45,9 +60,29 @@ export class PlayersComponent implements OnInit{
     return user && user.name ? user.name : '';
   }
 
-  private _filter(name: string): Player[] {
-    const filterValue = name.toLowerCase();
+//   selectPlayer(player): void{
+// console.log('elo',player);
+// this.model.playerA = player.option.value;
+// console.log(this.model.playerA);
+//   }  
 
-    return this.players.filter(player => player.name.toLowerCase().indexOf(filterValue) === 0);
-  }
+// doFilter(): void {
+  //   console.log('doFilter')
+  //  if(this.model.playerA.name == ''){
+  //    this.filteredPlayers = this.players;
+  //  }
+  //  else{
+  //    this.filteredPlayers = this.players.filter(player => player.name.toLowerCase().match(this.model.playerA.name.toLowerCase()))
+  //  }
+  //  console.log(this.filteredPlayers)
+  // }
+
+
+//   private _filter(players: Player[]): Player[] {
+//     return players.filter(player => player.name.toLowerCase().includes(this.model.playerA.name))
+//   }
+
+  // printModel(title: NgModel){
+  //   console.log(title)
+  // }
 }

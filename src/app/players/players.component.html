@@ -1,20 +1,76 @@
-<form class="example-form">
+<form 
+  class="example-form" 
+  >
     <mat-form-field class="example-full-width">
-        <mat-label>Gracz 1</mat-label>
-        <input type="text" matInput  [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let player of filteredPlayers | async" [value]="player">
+      <mat-label>Gracz 1</mat-label>
+      <input 
+        type="text" 
+        placeholder="Pick player"
+        matInput  
+        [(ngModel)]="model.playerA"
+        [ngModelOptions]="{standalone: true}"
+        name="playerA" 
+        [matAutocomplete]="auto"
+      >
+      <mat-autocomplete 
+        #auto="matAutocomplete" 
+        (optionSelected)="setPlayer(model)" 
+        [displayWith]="displayFn">
+          <mat-option 
+            *ngFor="let player of players" 
+            [value]="player"
+            >
             {{player.name}}
           </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+      </mat-autocomplete>
+    </mat-form-field>
+
       <mat-form-field class="example-full-width">
         <mat-label>Gracz 2</mat-label>
-        <input type="text" matInput  [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let player of filteredPlayers | async" [value]="player">
+        <input 
+          type="text" 
+          placeholder="Pick player"
+          matInput  
+          [matAutocomplete]="auto"
+          [(ngModel)]="model.playerB"
+          [ngModelOptions]="{standalone: true}"
+          ngDefaultControl
+          name="playerB">
+        <mat-autocomplete #auto="matAutocomplete" >
+          <mat-option 
+            *ngFor="let player of players" 
+            [value]="player"
+            >
             {{player.name}}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
   </form>
+
+
+
+<!-- 
+  <mat-form-field class="example-full-width">
+    <mat-label>Gracz 1</mat-label>
+    <input 
+      type="text" 
+      placeholder="Pick player"
+      matInput  
+      [(ngModel)]="model.playerA"
+      [ngModelOptions]="{standalone: true}"
+      name="playerA"
+      ngDefaultControl 
+      [matAutocomplete]="auto"
+    >
+    <mat-autocomplete 
+      #auto="matAutocomplete" 
+      (optionSelected)="setPlayer(model)" 
+      [displayWith]="displayFn">
+        <mat-option 
+          *ngFor="let player of players" 
+          [value]="player"
+          >
+          {{player.name}}
+        </mat-option>
+    </mat-autocomplete>
+  </mat-form-field> -->

@@ -1,9 +1,13 @@
 
 export interface Game {
+    player1a?: Player;
+    player1b?: Player;
+    player2a?: Player;
+    player2b?: Player;
     cards1: number;
     cards2: number;
-    tichu1: Tichu;
-    tichu2: Tichu;
+    tichu1: TichuTeam;
+    tichu2: TichuTeam;
     duel1: Duel;
     duel2: Duel;
     total1?: number;
@@ -14,14 +18,28 @@ export const EmptyGame = {
     cards1: 50,
     cards2: 50,
     tichu1: {
+        player1: {
             success: undefined,
             grande: undefined,
             score: 0,
-          },
+        },
+        // player2: {
+        //     success: undefined,
+        //     grande: undefined,
+        //     score: 0,
+        // }
+        },
     tichu2: {
-        success: undefined,
-        grande: undefined,
-        score: 0
+        player1: {
+            success: undefined,
+            grande: undefined,
+            score: 0,
+        },
+        // player2: {
+        //     success: undefined,
+        //     grande: undefined,
+        //     score: 0,
+        // }
       },
     duel1:  {
         success: undefined,
@@ -34,8 +52,12 @@ export const EmptyGame = {
     total1: 50,
     total2: 50
 }
-        
-export interface Tichu {
+export interface TichuTeam {
+    player1: TichuPlayer;
+    player2?: TichuPlayer;
+}
+
+export interface TichuPlayer {
     success: boolean;
     player?: Player;
     grande: boolean;
@@ -56,9 +78,15 @@ export interface Team {
 
 export interface Player {
     name: string;
-    teams: Team[];
-    games: Game[];
-    bigGames: BigGame[];
+    teams?: Team[];
+    games?: Game[];
+    bigGames?: BigGame[];
+}
+
+export interface PlayersInTeam {
+    playerA: Player;
+    playerB: Player;
+    team: number;
 }
 
 export interface BigGame {
