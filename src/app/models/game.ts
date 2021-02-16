@@ -52,6 +52,8 @@ export const EmptyGame = {
     total1: 50,
     total2: 50
 }
+
+
 export interface TichuTeam {
     player1: TichuPlayer;
     player2?: TichuPlayer;
@@ -91,5 +93,18 @@ export interface PlayersInTeam {
 
 export interface BigGame {
     games: Game[];
+    player1a?: Player;
+    player1b?: Player;
+    player2a?: Player;
+    player2b?: Player;
     date?: string;
+    total1?: number;
+    total2?: number;
+}
+
+
+export const EmptyBigGame = {
+    games: [],
+    total1: 0,
+    total2: 0
 }

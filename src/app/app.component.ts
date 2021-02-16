@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BigGame, EmptyGame, Game, Player, PlayersInTeam } from './models/game';
+import { BigGame, EmptyGame, Game, Player, PlayersInTeam, EmptyBigGame } from './models/game';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { HttpService } from './services/http.service';
@@ -15,7 +15,7 @@ export class AppComponent{
   title = 'tichu-friends';
   game: Game = EmptyGame;
   games: Game[] = [];
-  bigGame: BigGame;
+  bigGame: BigGame = EmptyBigGame;
   playersActive: Player[] = [];
 
   // exportBigGame = new BehaviorSubject<Game[]>(this.bigGame);
@@ -27,7 +27,11 @@ export class AppComponent{
 
   onNewGame(game: Game){
     this.game = game;
-    this.game.player1a
+    this.game.player1a = this.bigGame.player1a;
+    this.game.player1b = this.bigGame.player1b;
+    this.game.player2a = this.bigGame.player2a;
+    this.game.player2b = this.bigGame.player2b;
+
     this.games.push(game);
     return this.http.post('http://localhost:3000/games', game)
       .pipe(tap(console.log)).subscribe(
@@ -37,6 +41,10 @@ export class AppComponent{
   }
   onNewBigGame(bigGame: BigGame){
     this.bigGame = bigGame;
+    this.bigGame.player1a = this.game.player1a;
+    this.bigGame.player1b = this.game.player1b;
+    this.bigGame.player2a = this.game.player2a;
+    this.bigGame.player2b = this.game.player2b;
     this.games = [];
     return this.http.post('http://localhost:3000/bigGames', bigGame)
       .pipe(tap(console.log)).subscribe(
@@ -69,13 +77,20 @@ export class AppComponent{
     if(model.team == 1){
       this.game.player1a = model.playerA;
       this.game.player1b = model.playerB;
+      this.bigGame.player1a = model.playerA;
+      this.bigGame.player1b = model.playerB;
+      console.log(this.game)
+
     }
-    else{
+    if(model.team == 2){
       this.game.player2a = model.playerA;
       this.game.player2b = model.playerB;
+      this.bigGame.player2a = model.playerA;
+      this.bigGame.player2b = model.playerB;
+      console.log(this.game)
+
     }
 
-    console.log(this.game)
   }
 
   // postFirstGame(firstgame: BigGame){

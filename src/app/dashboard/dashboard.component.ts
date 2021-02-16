@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Subject } from 'rxjs';
-import { BIGGAME } from '../models/big-game';
-import { EmptyGame, Game, BigGame } from '../models/game';
+import { EmptyGame, Game, BigGame, EmptyBigGame } from '../models/game';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,7 +23,7 @@ export class DashboardComponent implements OnInit {
   c2: number;
   game: Game;
   games: Game[] = [];
-  bigGame: BigGame = BIGGAME;
+  bigGame: BigGame = EmptyBigGame;
   @Output() newGame = new EventEmitter<Game>();
   @Output() newBigGame = new EventEmitter<BigGame>();
 
@@ -95,12 +94,12 @@ export class DashboardComponent implements OnInit {
   sendBigGame(games: Game[]){
     
     this.bigGame = {
-      games: games,
+      games: games
     }
     console.log(this.bigGame);  
     this.newBigGame.emit(this.bigGame);
     this.games = [];
-    this.bigGame = BIGGAME;
+    this.bigGame = EmptyBigGame;
     this.clearSheet();
   }
 

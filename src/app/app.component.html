@@ -7,7 +7,7 @@
         </div>
     
         <div class="column-2">
-            <app-players team="2"></app-players>
+            <app-players (newTeam)="onNewTeam($event)" team="2"></app-players>
             <h2>Team 2</h2>
 
         </div>
