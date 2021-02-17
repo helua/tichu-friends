@@ -1,2 +1,18 @@
+.tichu-toggle{
+    display:block;
+    width: 100%;
 
-  
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+    margin-top: 0px;
+    & li{
+        line-height: 37px;
+        font-size: 25px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+}

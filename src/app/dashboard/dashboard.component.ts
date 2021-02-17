@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   gFail2Checked: boolean;
   duel1Checked: boolean;
   duel2Checked: boolean;
+  tPlayer1aChecked: boolean;
   c1: number;
   c2: number;
   game: Game;
@@ -86,6 +87,8 @@ export class DashboardComponent implements OnInit {
     this.gFail2Checked = false;
     this.duel1Checked = false;
     this.duel2Checked = false; 
+    
+    this.tPlayer1aChecked = false;
   }
 
   updateTotal(): void{

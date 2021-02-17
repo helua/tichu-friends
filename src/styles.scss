@@ -44,9 +44,35 @@ h1{
   width: 500px;
   
 }
+.cont-ext{
+  width: 1000px;
+  & .column-2-5:first-child{
+    margin-left: -180px;
+  }
+}
 span {
   font-size: 25px;
   // margin-top: 40px;    
+}
+
+.mat-button-toggle-checked{
+  background-color: rgba(#d50000, .6);
+  color: white;
+}
+  
+span.mat-button-toggle-label-content, span.mat-checkbox-label{
+  font-size: 14px;
+  padding: 0 8px;
+  line-height: 36px;
+}
+
+span.mat-checkbox-label{
+  padding:0;
+}
+
+label.mat-checkbox-layout{
+  padding: 8px;
+
 }
 
 
@@ -55,7 +81,7 @@ mat-slider{
 }
 
 mat-slide-toggle{
-  margin: 5px 0;
+  margin: 5px 5px;
 }
 .mat-slide-toggle-content{
   font-size: 1.3rem;
@@ -77,15 +103,20 @@ button.add{
   text-align: center;
 }
 .column-5{
-  width: 20%;
+  width: 25%;
   display: inline-block;
 
 }
-.column-3-5{
-  width: 60%;
+.column-2-5{
+  padding-top: 30px;
+  width: 30%;
   display: inline-block; 
-  text-align: center;
-  
+  &:first-child{
+    text-align: right;
+  }  
+  &:last-child{
+    text-align: left;
+  }
 
 }
 
