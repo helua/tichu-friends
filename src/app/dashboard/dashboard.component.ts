@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { EmptyGame, Game, BigGame, EmptyBigGame } from '../models/game';
 
@@ -26,7 +26,6 @@ export class DashboardComponent implements OnInit {
   bigGame: BigGame = EmptyBigGame;
   @Output() newGame = new EventEmitter<Game>();
   @Output() newBigGame = new EventEmitter<BigGame>();
-
   // lastGame =  new Subject<Game>();
 
   // constructor(public scoreService: ScoreService) {
