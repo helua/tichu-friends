@@ -14,13 +14,13 @@ import { Player, PlayersInTeam} from '../models/game'
   styleUrls: ['./players.component.scss']
 })
 export class  PlayersComponent implements OnInit{
+  @Input() team: number;
 
   model: PlayersInTeam = {
-    playerA: null,
-    playerB: null,
+    playerA: { name: "Player A" },
+    playerB: { name: "Player B" },
     team: null
   };
-  @Input() team: number;
   @Output() newTeam = new EventEmitter<PlayersInTeam>();
 
   

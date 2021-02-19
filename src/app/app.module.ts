@@ -15,11 +15,17 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
 import { MatButtonModule } from '@angular/material/button'; 
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonToggleModule } from '@angular/material/button-toggle'; 
-
-
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatDatepickerModule} from '@angular/material/datepicker';  
+import { MatNativeDateModule } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
+import { MatInputModule} from '@angular/material/input';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+import localePl from '@angular/common/locales/pl';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localePl);
 
 @NgModule({
   declarations: [
@@ -40,7 +46,10 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     MatIconModule,
     HttpClientModule,
     MatButtonToggleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule, 
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent],

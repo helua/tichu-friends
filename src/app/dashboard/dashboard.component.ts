@@ -50,6 +50,7 @@ export class DashboardComponent implements OnInit {
     this.updateTotal;
     this.clearSheet();
     this.game = {
+      date: this.bigGame.date,
       cards1: 50,
       cards2: 50,
       tichu1: [],

@@ -1,4 +1,14 @@
-<h1><span class="material-icons">star</span>{{title}}</h1>
+<div class="column-2">
+    <h1><span class="material-icons">star</span>{{title}}</h1>
+</div>
+
+<div class="column-2">
+    <mat-form-field>
+        <input matInput [(ngModel)]="gameDate" [matDatepicker]="picker" placeholder="Pick a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+</div>
 
     <div class="cont">
         <div class="column-2">

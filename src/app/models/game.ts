@@ -1,5 +1,6 @@
 
 export interface Game {
+    date?: Date;
     player1a?: Player;
     player1b?: Player;
     player2a?: Player;
@@ -36,7 +37,8 @@ export const EmptyGame = {
         score: 0
     },
     total1: 50,
-    total2: 50
+    total2: 50,
+    // date: new Date()
 }
 
 
@@ -83,7 +85,7 @@ export interface BigGame {
     player1b?: Player;
     player2a?: Player;
     player2b?: Player;
-    date?: string;
+    date?: Date;
     total1?: number;
     total2?: number;
 }
@@ -96,7 +98,8 @@ export const EmptyBigGame = {
     player2a: { name: "Player 2a" },
     player2b: { name: "Player 2b" },
     total1: 0,
-    total2: 0
+    total2: 0,
+    date: new Date()
 }
 
 export const TichuCollection = [

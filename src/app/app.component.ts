@@ -17,13 +17,20 @@ export class AppComponent{
   games: Game[] = [];
   bigGame: BigGame = EmptyBigGame;
   playersActive: Player[] = [];
+  gameDate = new Date();
+  
 
   // exportBigGame = new BehaviorSubject<Game[]>(this.bigGame);
 
   private url: "http://localhost:3000/games"
 
-  constructor(private http: HttpClient, private httpService: HttpService) { }
-
+  constructor(private http: HttpClient) { }
+  
+  // assignDate(event: KeyboardEvent){
+  //   console.log(event);
+  //   // let date = event;
+  //   // this.bigGame.date = date;
+  // }
 
   onNewGame(game: Game){
     this.game = game;
@@ -31,6 +38,7 @@ export class AppComponent{
     this.game.player1b = this.bigGame.player1b;
     this.game.player2a = this.bigGame.player2a;
     this.game.player2b = this.bigGame.player2b;
+
 
     this.games.push(game);
     return this.http.post('http://localhost:3000/games', game)
@@ -45,6 +53,15 @@ export class AppComponent{
     this.bigGame.player1b = this.game.player1b;
     this.bigGame.player2a = this.game.player2a;
     this.bigGame.player2b = this.game.player2b;
+    this.bigGame.total1 = this.bigGameTotal(1);
+    this.bigGame.total2 = this.bigGameTotal(2);
+
+
+      var d = this.gameDate.valueOf();
+      var epoche = (d / 1000);
+      var gameDateFormatted = new Date((epoche + 3600) * 1000)
+    this.bigGame.date = gameDateFormatted;
+
     this.games = [];
     return this.http.post('http://localhost:3000/bigGames', bigGame)
       .pipe(tap(console.log)).subscribe(
@@ -63,15 +80,7 @@ export class AppComponent{
     return totalPoints;
   }
 
-  bigGameTotalFuture(t: number){
-    if( t == 1 ){
-      var totalPointsFuture = this.game.total1 + this.bigGameTotal(1);
-    }
-    if ( t == 2 ){
-      var totalPointsFuture = this.game.total2 + this.bigGameTotal(2);
-    }
-    return totalPointsFuture;
-  }
+
 
   onNewTeam(model: PlayersInTeam){
     if(model.team == 1){
@@ -92,23 +101,6 @@ export class AppComponent{
     }
 
   }
-
-  // postFirstGame(firstgame: BigGame){
-  //   return this.http.post('http://localhost:3000/games', firstgame)
-  //     .pipe(tap(console.log)).subscribe(
-  //       result => console.log(result),
-  //       error => console.log(error)
-  //     );
-  // }
-
-  // postNextGame(nextgame: Game){
-  //   return this.http.post('http://localhost:3000/games', nextgame)
-  //   .pipe(tap(console.log)).subscribe(
-  //     result => console.log(result),
-  //     error => console.log(error)
-  //   );
-
-  //}
 
 
 
