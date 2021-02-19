@@ -41,11 +41,11 @@ export class AppComponent{
 
 
     this.games.push(game);
-    return this.http.post('http://localhost:3000/games', game)
-      .pipe(tap(console.log)).subscribe(
-        result => console.log(result),
-        error => console.log(error)
-      );
+    // return this.http.post('http://localhost:3000/games', game)
+    //   .pipe(tap(console.log)).subscribe(
+    //     result => console.log(result),
+    //     error => console.log(error)
+    //   );
   }
   onNewBigGame(bigGame: BigGame){
     this.bigGame = bigGame;
@@ -63,11 +63,11 @@ export class AppComponent{
     this.bigGame.date = gameDateFormatted;
 
     this.games = [];
-    return this.http.post('http://localhost:3000/bigGames', bigGame)
-      .pipe(tap(console.log)).subscribe(
-        result => console.log(result),
-        error => console.log(error)
-      );
+    // return this.http.post('http://localhost:3000/bigGames', bigGame)
+    //   .pipe(tap(console.log)).subscribe(
+    //     result => console.log(result),
+    //     error => console.log(error)
+    //   );
   }
   
   bigGameTotal(t: number){

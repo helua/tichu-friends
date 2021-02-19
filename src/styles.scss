@@ -42,12 +42,21 @@ h1{
 
 .cont{
   width: 500px;
+  @media screen and (max-width: 400px) {
+    width: 300px;
+  }
   
 }
 .cont-ext{
   width: 1000px;
   & .column-2-5:first-child{
     margin-left: -180px;
+  }
+
+  @media screen and (max-width: 400px) {
+    & .column-2-5:first-child{
+      margin-left: -100px;
+    }
   }
 }
 // span {
@@ -64,6 +73,11 @@ span.mat-button-toggle-label-content, span.mat-checkbox-label{
   font-size: 14px;
   padding: 0 8px;
   line-height: 36px;
+  @media screen and (max-width: 400px) {
+    font-size: 8px;
+    padding: 0 2px;
+    line-height: 18px;
+  }
 }
 
 span.mat-checkbox-label{

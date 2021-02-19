@@ -11,8 +11,16 @@ import { Game, Player } from '../models/game';
 export class HttpService {
   constructor(private httpClient: HttpClient) {}
   
-  getPlayers(): Observable<Player[]> {
-    return this.httpClient.get<Player[]>('http://localhost:3000/players');
+  
+  getPlayers() {
+    return [{name: "Ania"},
+    {name: "Helio"},
+    {name: "Kostek"},
+    {name: "Igor"},
+    {name: "Panczez"},
+    {name: "Walc"},
+    {name: "Mikele"}]
+    // this.httpClient.get<Player[]>('http://localhost:3000/players');
   }
   
 }
