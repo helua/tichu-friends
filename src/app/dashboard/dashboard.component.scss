@@ -4,6 +4,12 @@
 
 }
 
+@media screen and (max-width: 400px){
+    .names{
+    display: none;
+}
+}
+
 ul{
     list-style: none;
     padding: 0;

@@ -41,12 +41,12 @@ export class  PlayersComponent implements OnInit{
 
   ngOnInit(): void {
    
-    this.players = this.http.getPlayers()
-    // .subscribe(kupa =>{
-    //   this.players = kupa;
-    //   this.filteredPlayers = kupa;
-    // })
-    // console.log(this.players);
+    this.http.getPlayers().subscribe(kupa =>{
+      this.players = kupa;
+      this.filteredPlayers = kupa;
+    })
+    console.log(this.players);
+   
     this.model.team = this.team;
 
   }
