@@ -1,13 +1,38 @@
 <h2>Stats</h2>
-<div *ngFor="let game of bigGames">
-  {{ game.date | date }}
+<div *ngFor="let bigGame of bigGames">
+  {{ bigGame.date | date }}
   <br>
-  team 1: {{ game.player1a.name }}, {{ game.player1b.name }} / {{ game.total1 }}
+  team 1: {{ bigGame.player1a.name }}, {{ bigGame.player1b.name }} / {{ bigGame.total1 }}
   <br>
-  team 2: {{ game.player2a.name }}, {{ game.player2b.name }} / {{ game.total2 }}
+  team 2: {{ bigGame.player2a.name }}, {{ bigGame.player2b.name }} / {{ bigGame.total2 }}
   <br>
-  <!-- <table>
-    <th>1</th><th>2</th>
-  </table> -->
+  <table>
+    <th>1 tichu</th><th>1 duel</th><th>1 score</th><th>2 score</th><th>2 duel</th><th>2 tichu</th>
+    <tr *ngFor="let game of bigGame.games">
+      <td>
+        <div *ngFor="let tichu of game.tichu1">
+          {{ tichu.tichu }} ( {{ tichu.player?.name }} )
+        </div>
+      </td>
+      <td>
+        <div>
+          {{ game.duel1?.success }}
+        </div>
+      </td>
+      <td>{{ game.total1 }}</td>
+      <td>{{ game.total2 }}</td>
+      <td>
+        <div>
+          {{ game.duel2?.success }}
+        </div>
+      </td>
+      <td>
+        <div *ngFor="let tichu of game.tichu2">
+          {{ tichu.tichu }} ( {{ tichu.player?.name }} )
+        </div>
+      </td>
+    </tr>
+  </table>
   <br>
 </div>
+
