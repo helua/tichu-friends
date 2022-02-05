@@ -11,24 +11,24 @@
     <tr *ngFor="let game of bigGame.games">
       <td>
         <div *ngFor="let tichu of game.tichu1">
-          {{ tichu.tichu }} ( {{ tichu.player?.name }} )
+          {{ tichu.tichu }} ({{ tichu.player?.name }})
         </div>
       </td>
       <td>
         <div>
-          {{ game.duel1?.success }}
+          {{ displayDuelSuccess(game.duel1?.success) }}
         </div>
       </td>
       <td>{{ game.total1 }}</td>
       <td>{{ game.total2 }}</td>
       <td>
         <div>
-          {{ game.duel2?.success }}
+          {{ displayDuelSuccess(game.duel2?.success) }}
         </div>
       </td>
       <td>
         <div *ngFor="let tichu of game.tichu2">
-          {{ tichu.tichu }} ( {{ tichu.player?.name }} )
+          {{ tichu.tichu }} ({{ tichu.player?.name }})
         </div>
       </td>
     </tr>

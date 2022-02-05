@@ -1,4 +1,18 @@
-  <div class="welcome">
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Password misiu</mat-label>
+      <input
+        type="text"
+        placeholder="password"
+        name="password misiu"
+        matInput
+        [(ngModel)]="allow"
+        [ngModelOptions]="{standalone: true}"
+        name="playerA"
+      >
+  </mat-form-field>
+</form>
+  <div *ngIf="allow === 'hasło'" class="welcome">
     <a routerLink="/game">
       <div class="column-2 welcome-btn">
         <h2>New Game</h2>

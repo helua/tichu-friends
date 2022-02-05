@@ -1,24 +1,22 @@
-<form 
-  class="example-form" 
-  >
+<form class="example-form">
     <mat-form-field class="example-full-width">
       <mat-label>Player A</mat-label>
-      <input 
-        type="text" 
+      <input
+        type="text"
         placeholder="Pick player"
-        matInput  
+        matInput
         [(ngModel)]="model.playerA"
         [ngModelOptions]="{standalone: true}"
-        name="playerA" 
+        name="playerA"
         [matAutocomplete]="auto"
       >
-      <mat-autocomplete 
-        #auto="matAutocomplete" 
-        (optionSelected)="setPlayer(model)" 
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="setPlayer(model)"
         [displayWith]="displayFn"
         >
-          <mat-option 
-            *ngFor="let player of players" 
+          <mat-option
+            *ngFor="let player of players"
             [value]="player"
             >
             {{player.name}}
@@ -28,22 +26,22 @@
 
     <mat-form-field class="example-full-width">
       <mat-label>Player B</mat-label>
-      <input 
-        type="text" 
+      <input
+        type="text"
         placeholder="Pick player"
-        matInput  
+        matInput
         [(ngModel)]="model.playerB"
         [ngModelOptions]="{standalone: true}"
-        name="playerA" 
+        name="playerA"
         [matAutocomplete]="auto"
       >
-      <mat-autocomplete 
-        #auto="matAutocomplete" 
-        (optionSelected)="setPlayer(model)" 
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="setPlayer(model)"
         [displayWith]="displayFn"
         >
-          <mat-option 
-            *ngFor="let player of players" 
+          <mat-option
+            *ngFor="let player of players"
             [value]="player"
             >
             {{player.name}}
@@ -54,25 +52,25 @@
 
 
 
-<!-- 
+<!--
   <mat-form-field class="example-full-width">
     <mat-label>Gracz 1</mat-label>
-    <input 
-      type="text" 
+    <input
+      type="text"
       placeholder="Pick player"
-      matInput  
+      matInput
       [(ngModel)]="model.playerA"
       [ngModelOptions]="{standalone: true}"
       name="playerA"
-      ngDefaultControl 
+      ngDefaultControl
       [matAutocomplete]="auto"
     >
-    <mat-autocomplete 
-      #auto="matAutocomplete" 
-      (optionSelected)="setPlayer(model)" 
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="setPlayer(model)"
       [displayWith]="displayFn">
-        <mat-option 
-          *ngFor="let player of players" 
+        <mat-option
+          *ngFor="let player of players"
           [value]="player"
           >
           {{player.name}}

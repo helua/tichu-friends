@@ -20,5 +20,16 @@ export class StatsComponent implements OnInit {
     })
 
   }
+  displayDuelSuccess(r: boolean){
+    if(r === true){
+      return '✔'
+    }
+  }
+  // displayTichu(r: string){
+  //   console.log(r);
+  //   if(r === 'TICHUFAIL'){
+  //     return 'T̶I̶C̶H̶U̶'
+  //   }
+  // }
 
 }

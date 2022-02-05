@@ -7,8 +7,8 @@
     </div>
 </div>
 <div class="cont">
-    <label>Punkty</label>
-    <mat-slider 
+    <label>Card points</label>
+    <mat-slider
         thumbLabel
         #cards
         tickInterval="auto"
@@ -28,15 +28,15 @@
 <!-- TICHU 1 -->
 
         <div class="tichu-toggle">
-            <mat-button-toggle-group 
-                (change)="updateTichuPlayers(1, $event)" 
-                [disabled]="!tichu1Checked" 
-                [checked]="!tichu1Checked" 
+            <mat-button-toggle-group
+                (change)="updateTichuPlayers(1, $event)"
+                [disabled]="!tichu1Checked"
+                [checked]="!tichu1Checked"
                 appearance="legacy" name="tichu1" aria-label="tichu1" >
                 <mat-button-toggle aria-label="tichu1a" [checked]="tPlayer1aChecked" [value]="bigGame.player1a">{{ bigGame.player1a.name }}</mat-button-toggle>
                 <mat-button-toggle aria-label="tichu1b" [checked]="tPlayer1bChecked" [value]="bigGame.player1b">{{ bigGame.player1b.name }}</mat-button-toggle>
             </mat-button-toggle-group>
-            <mat-slide-toggle 
+            <mat-slide-toggle
                 [checked]="tichu1Checked"
                 [disabled]="grande1Checked"
                 [disabled]="tichu2Checked"
@@ -48,19 +48,19 @@
         </div>
 <!-- FAIL 1 -->
         <div class="tichu-toggle">
-                <mat-checkbox 
+                <mat-checkbox
                     (change)="updateFailPlayers('1a', $event)"
                     [checked]="fPlayer1aChecked"
                     [disabled]="!fail1Checked"
-                    
-                    [disabled]="fPlayer1aDisabled" 
-                    
+
+                    [disabled]="fPlayer1aDisabled"
+
                     >
                     {{ bigGame.player1a.name }}
                 </mat-checkbox>
-                <mat-checkbox 
+                <mat-checkbox
                     (change)="updateFailPlayers('1b', $event)"
-                    [checked]="fPlayer1bChecked" 
+                    [checked]="fPlayer1bChecked"
                     [disabled]="!fail1Checked"
                     >
                     {{ bigGame.player1b.name }}
@@ -70,45 +70,45 @@
                 [disabled]="grande1Checked && gFail1Checked"
                 [disabled]="tichu1Checked && gFail1Checked"
                 (change)="updateTichuFail(1, $event)">
-                
+
             </mat-slide-toggle>
         </div>
 <!-- GRANDE 1 -->
         <div class="tichu-toggle">
-            <mat-button-toggle-group 
-                (change)="updateGrandePlayers(1, $event)" 
-                [disabled]="!grande1Checked" 
+            <mat-button-toggle-group
+                (change)="updateGrandePlayers(1, $event)"
+                [disabled]="!grande1Checked"
                 appearance="legacy" name="grande1" aria-label="grande1" >
                 <mat-button-toggle aria-label="grande1a"
                     [checked]="gPlayer1aChecked" [value]="bigGame.player1a">{{ bigGame.player1a.name }}</mat-button-toggle>
                 <mat-button-toggle aria-label="grande1b"
                     [checked]="gPlayer1bChecked" [value]="bigGame.player1b">{{ bigGame.player1b.name }}</mat-button-toggle>
             </mat-button-toggle-group>
-            <mat-slide-toggle 
+            <mat-slide-toggle
                 [checked]="grande1Checked"
                 [disabled]="tichu1Checked"
                 [disabled]="tichu2Checked"
                 [disabled]="grande2Checked"
                 [disabled]="duel2Checked"
                 [disabled]="fail1Checked && gFail1Checked"
-                (change)="updateGrande(1, $event)"> 
+                (change)="updateGrande(1, $event)">
             </mat-slide-toggle>
         </div>
 <!-- GRANDE FAIL 1 -->
         <div class="tichu-toggle">
-                <mat-checkbox 
+                <mat-checkbox
                     (change)="updateGrandeFailPlayers('1a', $event)"
-                    [checked]="gFailPlayer1aChecked" 
+                    [checked]="gFailPlayer1aChecked"
                     [disabled]="!gFail1Checked">
                     {{ bigGame.player1a.name }}
                 </mat-checkbox>
-                <mat-checkbox 
+                <mat-checkbox
                     (change)="updateGrandeFailPlayers('1b', $event)"
-                    [checked]="gFailPlayer1bChecked" 
+                    [checked]="gFailPlayer1bChecked"
                     [disabled]="!gFail1Checked">
                     {{ bigGame.player1b.name }}
                 </mat-checkbox>
-            <mat-slide-toggle 
+            <mat-slide-toggle
                 (change)="updateGrandeFail(1, $event)"
                 [checked]="gFail1Checked"
                 [disabled]="tichu1Checked && fail1Checked"
@@ -139,7 +139,7 @@
     <div class="column-2-5">
 <!-- TICHU 2 -->
         <div class="tichu-toggle">
-            <mat-slide-toggle 
+            <mat-slide-toggle
                 [checked]="tichu2Checked"
                 [disabled]="tichu1Checked"
                 [disabled]="grande1Checked"
@@ -148,9 +148,9 @@
                 [disabled]="gFail2Checked && fail2Checked"
                 (change)="updateTichu(2, $event)">
             </mat-slide-toggle>
-            <mat-button-toggle-group 
-                (change)="updateTichuPlayers(2, $event)" 
-                [disabled]="!tichu2Checked" 
+            <mat-button-toggle-group
+                (change)="updateTichuPlayers(2, $event)"
+                [disabled]="!tichu2Checked"
                 appearance="legacy" name="tichu2" aria-label="tichu2" >
                 <mat-button-toggle aria-label="tichu2a"
                     [checked]="tPlayer2aChecked" [value]="bigGame.player2a">{{ bigGame.player2a.name }}</mat-button-toggle>
@@ -166,33 +166,33 @@
                 [checked]="fail2Checked"
                 (change)="updateTichuFail(2, $event)">
             </mat-slide-toggle>
-            <mat-checkbox                 
+            <mat-checkbox
                 (change)="updateFailPlayers('2a', $event)"
-                [checked]="fPlayer2aChecked" 
+                [checked]="fPlayer2aChecked"
                 [disabled]="!fail2Checked">
                 {{ bigGame.player2a.name }}
             </mat-checkbox>
-            <mat-checkbox 
+            <mat-checkbox
                 (change)="updateFailPlayers('2b', $event)"
-                [checked]="fPlayer2bChecked" 
+                [checked]="fPlayer2bChecked"
                 [disabled]="!fail2Checked">
                 {{ bigGame.player2b.name }}
             </mat-checkbox>
         </div>
 <!-- GRANDE TICHU 2 -->
         <div class="tichu-toggle">
-            <mat-slide-toggle 
+            <mat-slide-toggle
                 [checked]="grande2Checked"
                 [disabled]="tichu1Checked"
                 [disabled]="tichu2Checked"
                 [disabled]="grande1Checked"
                 [disabled]="duel1Checked"
                 [disabled]="fail2Checked && gFail2Checked"
-                (change)="updateGrande(2, $event)"> 
+                (change)="updateGrande(2, $event)">
             </mat-slide-toggle>
-            <mat-button-toggle-group 
-                (change)="updateGrandePlayers(2, $event)" 
-                [disabled]="!grande2Checked" 
+            <mat-button-toggle-group
+                (change)="updateGrandePlayers(2, $event)"
+                [disabled]="!grande2Checked"
                 appearance="legacy" name="grande2" aria-label="grande2" >
                 <mat-button-toggle aria-label="grande2a"
                     [checked]="gPlayer2aChecked" [value]="bigGame.player2a">{{ bigGame.player2a.name }}</mat-button-toggle>
@@ -202,21 +202,21 @@
         </div>
 <!-- GRANDE FAIL 2 -->
         <div class="tichu-toggle">
-            <mat-slide-toggle 
+            <mat-slide-toggle
                 (change)="updateGrandeFail(2, $event)"
                 [checked]="gFail2Checked"
                 [disabled]="tichu2Checked && fail2Checked"
                 [disabled]="grande2Checked && fail2Checked">
             </mat-slide-toggle>
-            <mat-checkbox 
+            <mat-checkbox
                 (change)="updateGrandeFailPlayers('2a', $event)"
-                [checked]="gFailPlayer2aChecked" 
+                [checked]="gFailPlayer2aChecked"
                 [disabled]="!gFail2Checked">
                 {{ bigGame.player2a.name }}
             </mat-checkbox>
-            <mat-checkbox 
+            <mat-checkbox
                 (change)="updateGrandeFailPlayers('2b', $event)"
-                [checked]="gFailPlayer2bChecked" 
+                [checked]="gFailPlayer2bChecked"
                 [disabled]="!gFail2Checked">
                 {{ bigGame.player2b.name }}
             </mat-checkbox>
@@ -227,7 +227,7 @@
             <mat-slide-toggle
                 (change)="updateDuel(2, $event)"
                 [checked]="duel2Checked"
-                [disabled]="duel1Checked"            
+                [disabled]="duel1Checked"
                 [disabled]="tichu1Checked"
                 [disabled]="grande1Checked">
             </mat-slide-toggle>
@@ -235,13 +235,13 @@
     </div>
 </div>
 <div class="cont">
-    <button (click)="sendGame(game)" class="add" mat-fab color="accent" >
+    <button (click)="sendGame(game)" class="add" mat-fab color="accent" title="Dodaj rozdanie">
         <mat-icon>add</mat-icon>
     </button>
     <!-- <button (click)="showBigGame()" class="add" mat-fab color="accent" >
         <mat-icon>add</mat-icon>
     </button> -->
-    <button (click)="sendBigGame(games)" class="add" mat-fab color="primary" >
+    <button (click)="sendBigGame(games)" class="add" mat-fab color="primary" title="Zapisz grę i wyczyść">
         <mat-icon>grading</mat-icon>
     </button>
 </div>
