@@ -39,13 +39,17 @@ $tichu-friends-theme: mat-light-theme((
 h1{
   color:#d50000;
 }
+a{
+  text-decoration: none;
+  color: black;
+}
 
 .cont{
   width: 500px;
   @media screen and (max-width: 400px) {
     width: 300px;
   }
-  
+
 }
 .cont-ext{
   width: 1000px;
@@ -62,14 +66,14 @@ h1{
 }
 // span {
 //   font-size: 25px;
-//   // margin-top: 40px;    
+//   // margin-top: 40px;
 // }
 
 .mat-button-toggle-checked{
   background-color: rgba(#d50000, .6);
   color: white;
 }
-  
+
 span.mat-button-toggle-label-content, span.mat-checkbox-label{
   font-size: 14px;
   padding: 0 8px;
@@ -100,7 +104,7 @@ mat-slide-toggle{
 }
 .mat-slide-toggle-content{
   font-size: 1.3rem;
-  
+
 
 }
 .mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb-label{
@@ -125,10 +129,10 @@ button.add{
 .column-2-5{
   padding-top: 30px;
   width: 30%;
-  display: inline-block; 
+  display: inline-block;
   &:first-child{
     text-align: right;
-  }  
+  }
   &:last-child{
     text-align: left;
   }

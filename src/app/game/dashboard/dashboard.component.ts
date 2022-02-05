@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subject } from 'rxjs';
-import { EmptyGame, Game, BigGame, EmptyBigGame, TichuType } from '../models/game';
+import { EmptyGame, Game, BigGame, EmptyBigGame, TichuType } from '../../models/game';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
     console.log('Start: ', this.game );
 
   }
-  
+
   showGame(): void{
     console.log(this.game)
   }
@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
       cards2: 50,
       tichu1: [],
       tichu2: [],
-    
+
       duel1:  {
           success: undefined,
           score: 0
@@ -70,11 +70,11 @@ export class DashboardComponent implements OnInit {
   }
 
   sendBigGame(games: Game[]){
-    
+
     this.bigGame = {
       games: games
     }
-    console.log(this.bigGame);  
+    console.log(this.bigGame);
     this.newBigGame.emit(this.bigGame);
     this.games = [];
     this.bigGame = EmptyBigGame;
@@ -102,23 +102,23 @@ export class DashboardComponent implements OnInit {
 
     this.tichu1Checked = false;
     this.tichu2Checked = false;
-    this.fail1Checked = false;  
+    this.fail1Checked = false;
     this.fail2Checked = false;
     this.grande1Checked = false;
     this.grande2Checked = false;
     this.gFail1Checked = false;
     this.gFail2Checked = false;
     this.duel1Checked = false;
-    this.duel2Checked = false; 
-    
-    
+    this.duel2Checked = false;
+
+
   }
 
   updateTotal(): void{
     this.game.total1 = this.game.cards1 + this.game.tichu1.reduce((accum,item) => accum + item.score, 0) + this.game.duel1.score;
     this.game.total2 = this.game.cards2 + this.game.tichu2.reduce((accum,item) => accum + item.score, 0) + this.game.duel2.score;
   }
-  
+
 //SLIDER
   scoreSet(value: number){
       this.game.cards1 = value;
@@ -148,7 +148,7 @@ export class DashboardComponent implements OnInit {
       if(c == true){
         this.game.tichu1.push({tichu: TichuType.TICHU, score: 100});
       }
-      else{        
+      else{
         var a = this.game.tichu1
         var b = a.filter(type => type.tichu === TichuType.TICHU);
         b.splice(0,1);
@@ -158,7 +158,7 @@ export class DashboardComponent implements OnInit {
         this.tPlayer1bChecked = false;
 
       }
-      console.log(this.game);    
+      console.log(this.game);
 
     }
     if(t == 2){
@@ -176,7 +176,7 @@ export class DashboardComponent implements OnInit {
         this.tPlayer2aChecked = false;
         this.tPlayer2bChecked = false;
       }
-      console.log(this.game);   
+      console.log(this.game);
 
     }
     this.updateTotal();
@@ -203,15 +203,15 @@ export class DashboardComponent implements OnInit {
         // });
         //przy dwóch playerach negative tichu jak się zachowa
         b.splice(0,2);
-        this.game.tichu1 = b;   
+        this.game.tichu1 = b;
 
         this.fPlayer1aChecked = false;
         this.fPlayer1bChecked = false;
 
 
-           
+
       }
-      console.log(this.game); 
+      console.log(this.game);
 
     }
     if(t == 2){
@@ -224,12 +224,12 @@ export class DashboardComponent implements OnInit {
         var a = this.game.tichu2
         var b = a.filter(type => type.tichu === TichuType.TICHUFAIL);
         b.splice(0,2);
-        this.game.tichu2 = b;  
-        
+        this.game.tichu2 = b;
+
         this.fPlayer2aChecked = false;
         this.fPlayer2bChecked = false;
       }
-      console.log(this.game); 
+      console.log(this.game);
 
     }
     this.updateTotal();
@@ -253,7 +253,7 @@ export class DashboardComponent implements OnInit {
         this.gPlayer1aChecked = false;
         this.gPlayer1bChecked = false;
       }
-      console.log(this.game);     
+      console.log(this.game);
 
     }
     if(t == 2){
@@ -267,11 +267,11 @@ export class DashboardComponent implements OnInit {
         var b = a.filter(type => type.tichu === TichuType.GRANDE);
         b.splice(0,1);
         this.game.tichu2 = b;
-      
+
         this.gPlayer2aChecked = false;
         this.gPlayer2bChecked = false;
       }
-      console.log(this.game);   
+      console.log(this.game);
 
     }
     this.updateTotal();
@@ -296,7 +296,7 @@ export class DashboardComponent implements OnInit {
         this.gFailPlayer1aChecked = false;
         this.gFailPlayer1bChecked = false;
       }
-      console.log(this.game); 
+      console.log(this.game);
 
     }
     if(t == 2){
@@ -314,7 +314,7 @@ export class DashboardComponent implements OnInit {
         this.gFailPlayer2aChecked = false;
         this.gFailPlayer2bChecked = false;
       }
-      console.log(this.game); 
+      console.log(this.game);
 
     }
     this.updateTotal();
@@ -337,7 +337,7 @@ export class DashboardComponent implements OnInit {
         this.game.duel1.score -= 200;
         this.duelBack();
       }
-      console.log(this.game);    
+      console.log(this.game);
 
     }
     if(t == 2){
@@ -355,7 +355,7 @@ export class DashboardComponent implements OnInit {
         this.duelBack();
 
       }
-      console.log(this.game);    
+      console.log(this.game);
 
     }
 
@@ -371,7 +371,7 @@ updateTichuPlayers(t: number, $event){
   if(t === 1){
     if($event.source.ariaLabel === "tichu1a"){
       this.tPlayer1aChecked = true;
- 
+
     }
     else{
       this.tPlayer1bChecked = true;
@@ -380,7 +380,7 @@ updateTichuPlayers(t: number, $event){
     var a = this.game.tichu1
     var b = a.filter(type => type.tichu === TichuType.TICHU);
     b.pop().player = position
-   
+
   }
   if(t === 2){
     if($event.source.ariaLabel === "tichu2a"){
@@ -416,7 +416,7 @@ updateTichuPlayers(t: number, $event){
       else{
         this.gPlayer2bChecked = true;
       }
-      
+
 
       var a = this.game.tichu2
       var b = a.filter(type => type.tichu === TichuType.GRANDE);
@@ -458,7 +458,7 @@ updateTichuPlayers(t: number, $event){
       }
       if(t === "2a"){
         this.fPlayer2aChecked = c;
-    
+
         var a = this.game.tichu2
         var b = a.filter(type => type.tichu === TichuType.TICHUFAIL);
         b.pop().player = this.bigGame.player2a;
@@ -470,7 +470,7 @@ updateTichuPlayers(t: number, $event){
         var b = a.filter(type => type.tichu === TichuType.TICHUFAIL);
         b.pop().player = this.bigGame.player2b;
       }
-    
+
   }
 
   updateGrandeFailPlayers(t: string, $event){
@@ -493,7 +493,7 @@ updateTichuPlayers(t: number, $event){
     }
     if(t === "2a"){
       this.gFailPlayer2aChecked = c;
-  
+
       var a = this.game.tichu2
       var b = a.filter(type => type.tichu === TichuType.GRANDEFAIL);
       b.pop().player = this.bigGame.player2a;
@@ -505,12 +505,12 @@ updateTichuPlayers(t: number, $event){
       var b = a.filter(type => type.tichu === TichuType.GRANDEFAIL);
       b.pop().player = this.bigGame.player2b;
     }
-  
-}
-
-
 
 }
 
-  
+
+
+}
+
+
 

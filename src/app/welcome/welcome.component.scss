@@ -1,0 +1,17 @@
+.welcome{
+  width: 102%;
+  display: block;
+  & .welcome-btn{
+    color: white;
+    background: radial-gradient(circle, rgba(251,88,63,1) 0%, rgba(251,0,0,1) 100%);
+    height: 250px;
+    text-align: center;
+    margin: 1%;
+    width: 48%;
+    border-radius: 10px;
+    & h2{
+      margin: 0;
+      line-height: 250px;
+    }
+  }
+}

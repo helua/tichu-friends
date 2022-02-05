@@ -4,8 +4,8 @@ import { NgForm, NgModel } from '@angular/forms';
 
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { HttpService } from '../services/http.service';
-import { Player, PlayersInTeam} from '../models/game'
+import { HttpService } from '../../services/http.service';
+import { Player, PlayersInTeam} from '../../models/game'
 
 
 @Component({
@@ -23,7 +23,7 @@ export class  PlayersComponent implements OnInit{
   };
   @Output() newTeam = new EventEmitter<PlayersInTeam>();
 
-  
+
   players: Player[];
       // {name: 'Helio'},
     // {name: 'Kostek'},
@@ -35,18 +35,18 @@ export class  PlayersComponent implements OnInit{
 
   filteredPlayers: Player[] = [];
   currentName = '';
-  
-  
+
+
   constructor(private http: HttpService) { }
 
   ngOnInit(): void {
-   
+
     this.http.getPlayers().subscribe(kupa =>{
       this.players = kupa;
       this.filteredPlayers = kupa;
     })
     console.log(this.players);
-   
+
     this.model.team = this.team;
 
   }
@@ -56,7 +56,7 @@ export class  PlayersComponent implements OnInit{
       this.newTeam.emit(model);
   }
 
-  
+
   displayFn(user: Player): string {
     return user && user.name ? user.name : '';
   }
@@ -65,7 +65,7 @@ export class  PlayersComponent implements OnInit{
 // console.log('elo',player);
 // this.model.playerA = player.option.value;
 // console.log(this.model.playerA);
-//   }  
+//   }
 
 // doFilter(): void {
   //   console.log('doFilter')

@@ -1,0 +1,13 @@
+<h2>Stats</h2>
+<div *ngFor="let game of bigGames">
+  {{ game.date | date }}
+  <br>
+  team 1: {{ game.player1a.name }}, {{ game.player1b.name }} / {{ game.total1 }}
+  <br>
+  team 2: {{ game.player2a.name }}, {{ game.player2b.name }} / {{ game.total2 }}
+  <br>
+  <!-- <table>
+    <th>1</th><th>2</th>
+  </table> -->
+  <br>
+</div>
